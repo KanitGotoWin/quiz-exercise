@@ -1,0 +1,20 @@
+<div
+  class="homepage d-flex align-items-center justify-content-center flex-column gap-4"
+>
+  <div class="main-text fw-bold fs-1">Quiz Exercise!</div>
+  <div class="sub-text fs-4">Who you are?</div>
+  <div
+    class="role-button-wrapper d-sm-flex justify-content-center align-items-center gap-4 d-block"
+  >
+    <button (click)="selectRole('tester')"
+      class="fs-4 btn btn-lg btn-warning border-dark py-3 d-flex align-items-center justify-content-center"
+    >
+      Tester
+    </button>
+    <button (click)="selectRole('developer')"
+      class="fs-4 btn btn-lg btn-warning border-dark py-3 d-flex align-items-center justify-content-center mt-4 mt-sm-0"
+    >
+      Developer
+    </button>
+  </div>
+</div>
