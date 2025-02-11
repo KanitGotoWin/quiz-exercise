@@ -1,6 +1,36 @@
 <nav class="navbar bg-dark">
-    <form class="container-fluid justify-content-start">
-      <button class="btn btn-outline-primary me-2" type="button">Main button</button>
-    </form>
-  </nav>
-<router-outlet></router-outlet>
+  <form class="container-fluid justify-content-start">
+    <button routerLink="/" class="btn btn-outline-primary me-2">
+      Home
+    </button>
+    <button routerLink="/quiz" class="btn btn-outline-primary me-2 active">
+      Quiz
+    </button>
+    <span class="ms-auto nav-link text-white fw-bold">
+      Your role: <span class="text-warning">{{role}}</span>
+    </span>
+  </form>
+</nav>
+
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a routerLink="/" class="nav-link active" aria-current="page" href="#">Home</a>
+        <a routerLink="/user/quiz" class="nav-link" href="#">Features</a>
+        <span class="nav-link disabled text-white fw-bold">
+          Your role: <span class="text-warning">{{role}}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
