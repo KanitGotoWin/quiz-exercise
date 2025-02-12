@@ -81,10 +81,6 @@ export class LayoutComponent {
     console.log(this.answers)
   }
 
-  submitAnswer(){
-    console.log("Submit Answer");
-  }
-
   ngOnInit(): void {
     this.roleService.role$.subscribe((role) => {
       this.role = role;
