@@ -1,1 +1,18 @@
-<p>Quiz Page</p>
+<div class="quiz container py-5">
+  <h2 class="question text-center">
+    <span>{{ currentPage }}. </span>
+    {{ currentQuiz.question }}
+  </h2>
+  <div class="answer mt-5">
+    <textarea 
+      class="form-control" 
+      rows="10" 
+      placeholder="Your answer here."
+      [value]="answer"
+      (input)="updateAnswer($event)">
+  </textarea>
+  </div>
+  <div class="submit mt-5 d-flex justify-content-end" *ngIf="isLast">
+    <button class="btn btn-success py-4 w-25">Submit Answer</button>
+  </div>
+</div>

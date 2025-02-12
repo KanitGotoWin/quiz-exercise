@@ -13,7 +13,8 @@ export const routes: Routes = [
     path: 'user', 
     component: LayoutComponent, 
     children: [
-      { path: 'quiz', component: QuizComponent }
+      { path: 'quiz', component: QuizComponent },
+      { path: '**', redirectTo: 'quiz' }
     ]
   }
 ];
