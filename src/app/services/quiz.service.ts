@@ -8,7 +8,16 @@ export class QuizService {
   constructor(private firestore: Firestore) {}
 
   submitQuiz(answers: string[]) {
-    const quizCollection = collection(this.firestore, 'quizAnswers');
-    return addDoc(quizCollection, { answers: answers, submittedAt: new Date() });
+       const storedUser = sessionStorage.getItem('registeredUser');
+       const userData = storedUser ? JSON.parse(storedUser) : null;
+   
+       const quizData = {
+         answers: answers,
+         user: userData,
+         submittedAt: new Date(),
+       };
+
+       const quizCollection = collection(this.firestore, 'quizAnswers');
+       return addDoc(quizCollection, quizData);
   }
 }

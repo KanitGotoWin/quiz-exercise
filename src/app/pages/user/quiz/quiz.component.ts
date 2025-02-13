@@ -26,15 +26,15 @@ export class QuizComponent {
   }
 
   submitAnswer() {
+    const registeredUser = sessionStorage.getItem('registeredUser');
     const savedAnswers = sessionStorage.getItem('quizAnswers');
-    const answers = savedAnswers
-      ? JSON.parse(savedAnswers)
-      : new Array(this.quizLength).fill('');
-      
+    const answers = savedAnswers ? JSON.parse(savedAnswers) : new Array(this.quizLength).fill('');
+    const user = registeredUser ? JSON.parse(registeredUser) : new Array();
     this.quizService
       .submitQuiz(answers)
       .then(() => {
         alert('Quiz submitted successfully!');
+        sessionStorage.removeItem('registeredUser');
         sessionStorage.removeItem('quizAnswers');
         sessionStorage.removeItem('currentPage');
         sessionStorage.removeItem('role');
