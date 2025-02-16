@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, getDoc, doc, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  constructor(private firestore: Firestore) {}
+  private quizCollection;
+
+  constructor(private firestore: Firestore) {
+    this.quizCollection = collection(this.firestore, 'quizAnswers');
+  }
 
   async submitQuiz(answers: string[], score: number) {
     const storedUser = sessionStorage.getItem('registeredUser');
@@ -19,8 +24,7 @@ export class QuizService {
     };
 
     try {
-      const quizCollection = collection(this.firestore, 'quizAnswers');
-      const docRef = await addDoc(quizCollection, quizData);
+      const docRef = await addDoc(this.quizCollection, quizData);
       const storedDocRef = doc(this.firestore, 'quizAnswers', docRef.id);
       const storedDocSnap = await getDoc(storedDocRef);
 
@@ -33,5 +37,10 @@ export class QuizService {
       console.error('Network error', error);
       throw error;
     }
+  }
+
+  getData(): Observable<any[]> {
+    const data = collectionData(this.quizCollection, { idField: 'id' }); 
+    return data;
   }
 }

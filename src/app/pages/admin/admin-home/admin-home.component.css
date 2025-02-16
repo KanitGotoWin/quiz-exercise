@@ -1,0 +1,10 @@
+.logout-button{
+    width: 100%;
+}
+
+
+@media (min-width: 992px){
+    .logout-button{
+        width: 10%;
+    }
+}

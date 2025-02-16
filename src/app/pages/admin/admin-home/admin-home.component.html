@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Admin Panel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <button class="btn btn-danger ms-auto mt-3 mt-lg-0 logout-button" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-5">
+  <h1 class="fw-bold">User quiz submits</h1>
+  <table class="table mt-4" *ngIf="userQuizSubmits.length > 0; else noData">
+    <thead>
+      <tr>
+        <th width="1%" scope="col">#</th>
+        <th scope="col">User detail</th>
+        <th width="5%" scope="col">Score</th>
+        <th width="35%" class="text-center" scope="col">Answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of userQuizSubmits let i = index">
+        <td scope="row">{{ i + 1 }}</td>
+        <td>
+          <div class="d-flex flex-column" *ngIf="item.user">
+            <div class="fw-bold">{{ item.user.name }}</div>
+            <small>{{ item.user.email }}</small>
+            <small>{{ item.user.phone }}</small>
+          </div>
+        </td>
+        <td>{{ item.score }}</td>
+        <td class="text-end">
+          <div class="row">
+            <div class="col-3" *ngFor="let ans of item.answers let k = index">
+                <li>{{ ans || '-' }}</li>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <h2 class="text-secondary text-center">No user submit found.</h2>
+  </ng-template>
+</div>
