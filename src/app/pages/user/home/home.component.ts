@@ -23,12 +23,12 @@ export class HomeComponent {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      role: ['', [Validators.required]]
+      // role: ['', [Validators.required]]
     });
   }
 
   selectRole(role: string) {
-    this.roleService.setRole(role);
+    // this.roleService.setRole(role);
     this.router.navigate(['/user/quiz']);
   }
 
@@ -37,8 +37,8 @@ export class HomeComponent {
       this.userForm.markAllAsTouched();
       return;
     }
-    const {role} = this.userForm.value;
-    this.roleService.setRole(role);
+    // const {role} = this.userForm.value;
+    // this.roleService.setRole(role);
     sessionStorage.setItem('registeredUser', JSON.stringify(this.userForm.value));
     this.router.navigate(['/user/quiz']);
   }

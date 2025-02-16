@@ -1,18 +1,82 @@
-<div class="quiz container py-5">
-  <h2 class="question text-center">
-    <span>{{ currentPage }}. </span>
-    {{ currentQuiz.question }}
-  </h2>
-  <div class="answer mt-5">
-    <textarea 
-      class="form-control" 
-      rows="10" 
-      placeholder="Your answer here."
-      [value]="answer"
-      (input)="updateAnswer($event)">
-  </textarea>
+<div class="quiz container py-5" *ngIf="!quizSubmitted; else summary">
+  <div *ngIf="currentQuiz; else loading">
+    <h1 class="question text-center fw-bold">
+      <span>{{ currentPage }}. </span>
+      {{ currentQuiz.question }}
+    </h1>
+    <div class="answer mt-5">
+      <div class="row gap-4">
+        <div class="col-12">
+          <div class="radio-wrapper gap-3">
+            <input class="form-check-input" type="radio" id="answerA" name="answer" value="A" [(ngModel)]="answer"
+              (change)="updateAnswer($event)" />
+            <label class="form-check-label fs-5" for="answerA">
+              {{ currentQuiz.A }}
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="radio-wrapper gap-3">
+            <input class="form-check-input" type="radio" id="answerB" name="answer" value="B" [(ngModel)]="answer"
+              (change)="updateAnswer($event)" />
+            <label class="form-check-label fs-5" for="answerB">
+              {{ currentQuiz.B }}
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="radio-wrapper gap-3">
+            <input class="form-check-input" type="radio" id="answerC" name="answer" value="C" [(ngModel)]="answer"
+              (change)="updateAnswer($event)" />
+            <label class="form-check-label fs-5" for="answerC">
+              {{ currentQuiz.C }}
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="radio-wrapper gap-3">
+            <input class="form-check-input" type="radio" id="answerD" name="answer" value="D" [(ngModel)]="answer"
+              (change)="updateAnswer($event)" />
+            <label class="form-check-label fs-5" for="answerD">
+              {{ currentQuiz.D }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="submit mt-5 d-flex justify-content-end" *ngIf="isLast">
+      <button class="btn btn-success py-4" (click)="submitAnswer()">Submit Answer</button>
+    </div>
   </div>
-  <div class="submit mt-5 d-flex justify-content-end" *ngIf="isLast">
-    <button class="btn btn-success py-4 w-25" (click)="submitAnswer()">Submit Answer</button>
-  </div>
+
+  <ng-template #loading>
+    <h2 class="text-center text-secondary">Question is loading...</h2>
+  </ng-template>
 </div>
+
+<ng-template #summary>
+  <div class="summary-wrapper container py-5">
+    <div class="summary-score-wrapper">
+      <div class="text-center fw-bold fs-2">Answers sent !</div>
+      <div class="text-center mt-4 fs-2">Your Score</div>
+      <div class="text-center text-success mt-4 fw-bold fs-1">{{ submitScore }}</div>
+    </div>
+
+    <div class="result-wrapper mt-5">
+      <div class="result" *ngFor="let item of quizData; let i = index; let last = last">
+        <div class="result-question fs-5">
+          <span class="text-primary fw-bold">Q:</span> {{ item.question }}
+        </div>
+        <div class="result-question fs-5 mt-3" [ngClass]="{'text-success': isCorrect(i), 'text-danger': !isCorrect(i)}">
+          <span class="text-primary fw-bold" [ngClass]="{'text-success': isCorrect(i), 'text-danger': !isCorrect(i)}">
+            A:
+          </span>
+          {{ storedData?.answers[i] ? (item[storedData.answers[i]] + " (" + storedData.answers[i] + ")") : '-' }}
+        </div>
+
+        <hr *ngIf="!last">
+
+      </div>
+    </div>
+  </div>
+</ng-template>

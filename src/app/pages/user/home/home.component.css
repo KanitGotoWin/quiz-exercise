@@ -15,6 +15,11 @@ input[type="radio"]{
     scale: 1.7;
 }
 
+.form-control,
+.btn-warning{
+    border: none;
+}
+
 @media only screen and (min-width: 992px) {
     .register-form{
         width: 30%;

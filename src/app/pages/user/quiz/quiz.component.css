@@ -1,3 +1,22 @@
-textarea{
+textarea {
     border: 1px solid black;
+}
+
+.radio-wrapper {
+    display: flex;
+}
+
+input[type="radio"] {
+    scale: 1.25;
+    border: 1px solid gray;
+}
+
+button.submit {
+    width: 40%;
+}
+
+@media (min-width: 600px) {
+    button.submit {
+        width: 25%;
+    }
 }
